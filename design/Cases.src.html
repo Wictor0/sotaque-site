@@ -512,7 +512,7 @@ class Component extends DCLogic {
       const i = D.indexOf(c);
       return { n: c.n, img: c.img, href: '#' + c.id, open: this._open[i], x: pp[k][0], y: pp[k][1], r: pp[k][2], z: pp[k][3], dl: (0.25 + k * 0.12).toFixed(2) };
     });
-    const cobIds = ['70bd52bb5160922f31c8b2d0c9d582c4', '8e7ba68d942e8214a78b47bf3844f949', '34ffd6b8362b18547d6dad7d7e3fe395', 'fd81411634845b5fca7531c20a69b067', '0caab66028b7790e937731a5223c1c95', '7938f17fe6bf53296af3357ec2ec7340', '9fc56471b76e0cd835044f656886f00c', '67f1b25f723e1456d10b5295d6f5a35f', '21dd5b4bb90179cd678e9a7cf63b24db', 'd28c48734c193699e0b8cd15ecc45063', 'd5d2e6a9dd7b67c8bfeb1f9427cb2376', 'c30d4b8baf59994da91c5da5054900e5'];
+    const cobIds = ['/_blob/70bd52bb5160922f31c8b2d0c9d582c4', '/_blob/8e7ba68d942e8214a78b47bf3844f949', '/_blob/34ffd6b8362b18547d6dad7d7e3fe395', '/_blob/fd81411634845b5fca7531c20a69b067', '/_blob/0caab66028b7790e937731a5223c1c95', '/_blob/7938f17fe6bf53296af3357ec2ec7340', '/_blob/9fc56471b76e0cd835044f656886f00c', '/_blob/67f1b25f723e1456d10b5295d6f5a35f', '/_blob/21dd5b4bb90179cd678e9a7cf63b24db', '/_blob/d28c48734c193699e0b8cd15ecc45063', '/_blob/d5d2e6a9dd7b67c8bfeb1f9427cb2376', '/_blob/c30d4b8baf59994da91c5da5054900e5'];
     const oi = st.open;
     const isOpen = oi != null;
     const cc = D[isOpen ? oi : 0];
@@ -532,7 +532,7 @@ class Component extends DCLogic {
       tabi: menu ? 0 : -1,
       toggleMenu: () => this.setState({ menu: !(this.state || {}).menu }),
       closeMenu: () => this.setState({ menu: false }),
-      cobs: cobIds.map((x) => '/_blob/' + x),
+      cobs: cobIds,
       pols: pols,
       liveTxt: String(live).padStart(2, '0'),
       soonTxt: String(D.length - live),
