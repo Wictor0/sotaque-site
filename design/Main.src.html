@@ -883,7 +883,7 @@ class Component extends DCLogic {
           const swap = r.bottom < hy + hr.height;
           el.style.setProperty('--hl', swap ? '0' : '1');
           ho = swap ? 1 : 0;
-          if (mm > 0.002 && !this._brandLock) { this.resetBrand(); this._brandLock = true; }
+          if (mm > 0.002 && !this._brandLock) { this.freezeLetters(); this._brandLock = true; }
           if (mm <= 0.002 && this._brandLock) { this._brandLock = false; }
           if (((this.state || {}).scrolled || false) !== (mm > 0.02)) this.setState({ scrolled: mm > 0.02 });
         }
@@ -1112,6 +1112,18 @@ class Component extends DCLogic {
     }
     return a.map((_, i) => b[(i + bo) % n]);
   }
+  freezeLetters() {
+    if (!this.letEls()) return;
+    const keys = 'SOTAQUE'.split('');
+    keys.forEach((k) => {
+      const tw = this._tw[k];
+      if (tw) { this._cur[k] = tw.to; this.setExact(k, tw.to); }
+    });
+    this._tw = {}; this._pend = {}; this._rq = {};
+    this._fromSt = Object.assign({}, this._cur);
+    this._fox = Object.assign({}, this._ox || {});
+    this._sk = undefined;
+  }
   stqStep(hero, e) {
     if (!this.letEls()) return;
     const k = Math.max(0, Math.min(1, e));
@@ -1119,12 +1131,16 @@ class Component extends DCLogic {
     this._sk = k;
     hero.style.setProperty('--src', k > 0.985 ? '0' : '1');
     const keys = 'SOTAQUE'.split('');
-    if (k <= 0.001) { keys.forEach((kk) => this.setExact(kk, 0)); return; }
-    if (k >= 0.999) { keys.forEach((kk) => this.setExact(kk, 8)); return; }
+    const from = this._fromSt || {};
+    const fox = this._fox || {};
+    const tr = (kk, f) => { const v = (fox[kk] || 0) * f; if (Math.abs(v) < 0.01) this._le[kk].removeAttribute('transform'); else this._le[kk].setAttribute('transform', 'translate(' + v.toFixed(2) + ' 0)'); };
+    if (k <= 0.001) { keys.forEach((kk) => { this.setExact(kk, from[kk] || 0); tr(kk, 1); }); return; }
+    if (k >= 0.999) { keys.forEach((kk) => { this.setExact(kk, 8); tr(kk, 0); }); return; }
     const sm = k * k * (3 - 2 * k);
     keys.forEach((kk) => {
+      tr(kk, 1 - sm);
       let d = '';
-      this.pairPolys(0, 8, kk).forEach((pr) => {
+      this.pairPolys(from[kk] || 0, 8, kk).forEach((pr) => {
         const a = pr[0], b = pr[1];
         for (let i = 0; i < a.length; i++) d += (i ? 'L' : 'M') + (a[i][0] + (b[i][0] - a[i][0]) * sm).toFixed(1) + ' ' + (a[i][1] + (b[i][1] - a[i][1]) * sm).toFixed(1);
         d += 'Z';
