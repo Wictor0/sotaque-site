@@ -20,3 +20,13 @@ open(P+'Mobile.dc.html','w').write(m)
 open('/home/claude/harness/main.html','w').write(s.replace('<script src="./support.js"></script>','<script src="./dc-runtime.js"></script>'))
 open('/home/claude/harness/mob.html','w').write(m.replace('<script src="./support.js"></script>','<script src="./dc-runtime.js"></script>'))
 print('ok')
+# ---- página de cases ----
+css=s.split('<style>',1)[1].split('</style>',1)[0]
+c=open('/home/claude/src/Cases.src.html').read().replace('%%BASECSS%%',css).replace('%%STQ%%',stq)
+assert '%%' not in c
+open(P+'Cases.dc.html','w').write(c)
+cm=c.replace('<title>Sotaque — Cases</title>','<title>Sotaque — Cases mobile</title>').replace('"$preview":{"width":1440,"height":3450}','"$preview":{"width":390,"height":5900}')
+assert cm!=c
+open(P+'CasesMobile.dc.html','w').write(cm)
+open('/home/claude/harness/cases.html','w').write(c.replace('<script src="./support.js"></script>','<meta name="viewport" content="width=device-width, initial-scale=1"><script src="./dc-runtime.js"></script>'))
+print('cases ok')

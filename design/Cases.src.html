@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sotaque — Cases</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..900&amp;family=Gochi+Hand&amp;display=swap" rel="stylesheet">
+<style>
+%%BASECSS%%
+/* ================= página de cases ================= */
+.stq.cpage{--ho:1}
+.cp .hlogo{opacity:1}
+
+/* hero */
+.chero{position:relative;background:var(--ink);color:var(--cream);padding:170px 0 120px;overflow:hidden;min-height:820px}
+.chero .wrap{position:relative;z-index:3}
+.chTitle{font-size:clamp(56px,7vw,128px);line-height:.88;margin:0;max-width:56%;font-stretch:118%}
+.chTitle .co{color:var(--coral);position:relative;white-space:nowrap}
+.chTitle .co svg{position:absolute;left:-6%;top:4%;width:112%;height:104%;overflow:visible;pointer-events:none}
+.chTitle .co path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--d,0));transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1) .5s}
+.cp.ready .chTitle .co{--d:1}
+.chSub{font-size:20px;line-height:1.5;max-width:470px;margin:34px 0 0;color:rgba(245,236,220,.82)}
+.chCount{display:flex;align-items:flex-end;gap:18px;margin-top:46px}
+.chNum{font:400 128px/.8 'Anton',Impact,sans-serif;color:var(--yellow)}
+.chLab{font:800 18px/1.15 'Archivo',sans-serif;font-stretch:110%;text-transform:uppercase;letter-spacing:.02em;padding-bottom:6px}
+.chLab .hand{display:block;text-transform:none;font-weight:400;font-size:24px;color:var(--lav);letter-spacing:0;margin-top:4px}
+.chCobs{position:absolute;right:-60px;bottom:-60px;display:grid;grid-template-columns:repeat(4,110px);gap:0;opacity:.95;transform:rotate(-8deg) translateY(calc(var(--q,0) * -60px));z-index:1}
+.chCobs img{display:block;width:110px;height:110px}
+
+/* polaroids flutuando no hero */
+.pols{position:absolute;right:2%;top:130px;width:min(600px,42vw);height:640px;z-index:2;transform:translateY(calc(var(--q,0) * 70px))}
+.pol{position:absolute;display:block;width:min(290px,21vw);background:var(--cream);padding:10px 10px 0;border-radius:6px 8px 5px 7px;box-shadow:0 26px 50px rgba(0,0,0,.35);text-decoration:none;color:var(--ink);transform:translate(calc(var(--mx,0) * var(--z) * 1px),calc(var(--my,0) * var(--z) * 1px)) rotate(var(--r));transition:transform .5s cubic-bezier(.2,1.4,.35,1),box-shadow .3s;opacity:0;animation:polIn .9s cubic-bezier(.2,1.3,.35,1) forwards;animation-delay:var(--dl)}
+.pol:hover{transform:translate(calc(var(--mx,0) * var(--z) * 1px),calc(var(--my,0) * var(--z) * 1px - 14px)) rotate(0deg) scale(1.06);z-index:9;box-shadow:0 36px 70px rgba(0,0,0,.45);color:var(--ink)}
+.pol img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:3px}
+.pol span{display:block;font:400 22px/1 'Gochi Hand',cursive;padding:10px 4px 12px}
+.pol .tp{position:absolute;left:50%;top:-14px;width:90px;height:28px;margin-left:-45px;background:rgba(229,203,90,.85);transform:rotate(-4deg);border-radius:2px}
+@keyframes polIn{from{opacity:0;translate:0 80px;scale:.8}to{opacity:1;translate:0 0;scale:1}}
+.static .pol{animation:none;opacity:1}
+
+/* filtros */
+.clist{position:relative;background:var(--cream);padding:90px 0 120px}
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:46px}
+.flab{font:400 26px/1 'Gochi Hand',cursive;margin-right:8px;transform:rotate(-3deg)}
+.fchip{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);font:800 16px/1 'Archivo',sans-serif;font-stretch:110%;cursor:pointer;transition:transform .35s cubic-bezier(.2,1.6,.4,1),background .2s,color .2s}
+.fchip sup{font:400 12px/1 'Anton',sans-serif;letter-spacing:.04em;opacity:.7}
+.fchip:hover{transform:rotate(-3deg) translateY(-2px);background:var(--yellow)}
+.fchip.on{background:var(--ink);color:var(--cream);transform:rotate(-2deg)}
+.fchip:focus-visible{outline:3px dashed var(--blue);outline-offset:3px}
+
+/* lista editorial */
+.rows{border-top:2px solid var(--ink)}
+.row{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr) 300px 54px;align-items:center;gap:24px;padding:26px 6px;border-bottom:2px solid var(--ink);text-decoration:none;color:var(--ink);isolation:isolate;cursor:pointer;transition:opacity .35s,padding .5s cubic-bezier(.2,1.2,.3,1)}
+.row::before{content:"";position:absolute;inset:0;background:var(--cc);clip-path:inset(0 100% 0 0 round 0);transition:clip-path .55s cubic-bezier(.7,0,.2,1);z-index:-1}
+.row:hover,.row:focus-visible{color:var(--ct,#212C29);padding-left:22px;outline:none}
+.row:hover::before,.row:focus-visible::before{clip-path:inset(0 0 0 0 round 0)}
+.rnum{font:400 22px/1 'Anton',sans-serif;letter-spacing:.04em;transition:transform .5s cubic-bezier(.2,1.6,.4,1)}
+.row:hover .rnum{transform:rotate(-12deg) scale(1.3)}
+.rname{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-stretch:125%;letter-spacing:-.035em;font-size:clamp(40px,5.2vw,82px);line-height:.95;transition:font-stretch .6s cubic-bezier(.2,1,.3,1),letter-spacing .6s,font-weight .6s}
+.row:hover .rname{font-stretch:66%;font-weight:900;letter-spacing:-.01em}
+.rmeta{display:flex;flex-direction:column;gap:6px}
+.rsvc{font:800 15px/1.2 'Archivo',sans-serif;font-stretch:110%;text-transform:uppercase;letter-spacing:.03em}
+.rvoz{font:400 22px/1.1 'Gochi Hand',cursive;opacity:.85}
+.rby{align-self:flex-start;font:400 11px/1 'Anton',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:5px 8px 4px;border-radius:999px;background:var(--ink);color:var(--cream);margin-top:2px}
+.rph{align-self:flex-start;font:500 11px/1 ui-monospace,Menlo,monospace;padding:4px 7px;border-radius:5px;background:rgba(33,44,41,.1)}
+.rarr{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px currentColor;transition:transform .45s cubic-bezier(.2,1.6,.4,1),background .2s}
+.row:hover .rarr{transform:rotate(45deg);background:var(--ink);color:var(--cream);box-shadow:none}
+.rthumb{display:none}
+.row.hide{display:none}
+.row.ph .rname{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.row.ph:hover .rname{color:var(--ct,#212C29);-webkit-text-stroke:0}
+.rows.dim .row:not(.act){opacity:.35}
+
+/* preview que segue o cursor */
+.peek{position:fixed;left:0;top:0;width:430px;z-index:40;pointer-events:none;transform:translate3d(var(--px,0),var(--py,0),0)}
+.peekIn{position:relative;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(21,27,25,.35);transform:scale(.2) rotate(-14deg);opacity:0;transition:transform .5s cubic-bezier(.2,1.5,.35,1),opacity .25s}
+.peek.on .peekIn{transform:scale(1) rotate(var(--pr,-5deg));opacity:1}
+.bar{display:flex;gap:6px;align-items:center;height:26px;padding:0 11px;background:#ECE4D6}
+.bar i{width:9px;height:9px;border-radius:50%;background:#F84A48}.bar i+i{background:#E5CB5A}.bar i+i+i{background:#5FD068}
+.bar b{flex:1;height:12px;margin-left:10px;border-radius:6px;background:rgba(33,44,41,.1)}
+.pimgs{position:relative;aspect-ratio:16/10}
+.pimgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.08);transition:opacity .35s,transform .6s cubic-bezier(.2,1,.3,1)}
+.pimgs img.on{opacity:1;transform:none}
+.pimgs .phc{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .35s}
+.pimgs .phc.on{opacity:1}
+.pimgs .phc img{position:static;width:46%;height:auto;opacity:1;transform:rotate(-8deg)}
+
+/* faixa final */
+.cnext{position:relative;background:var(--yellow);padding:110px 0;overflow:hidden;text-align:center}
+.cnext h2{font-size:clamp(44px,6.6vw,110px);line-height:.9;margin:0 0 30px}
+.cnext .hand{font-size:28px;margin:0 0 34px}
+.cnStk{position:absolute;width:150px;filter:drop-shadow(0 6px 0 rgba(0,0,0,.12));transition:transform .5s cubic-bezier(.2,1.6,.4,1)}
+.cnStk.a{left:7%;top:18%;transform:rotate(-12deg)}.cnStk.b{right:8%;bottom:14%;transform:rotate(10deg);width:130px}
+.cnext:hover .cnStk.a{transform:rotate(-24deg) scale(1.1)}.cnext:hover .cnStk.b{transform:rotate(22deg) scale(1.1)}
+
+/* folha de detalhe do case */
+.sheet{position:fixed;inset:0;z-index:96;pointer-events:none;visibility:hidden;transition:visibility 0s .6s}
+.sheet.on{pointer-events:auto;visibility:visible;transition:none}
+.shade{position:absolute;inset:0;background:rgba(21,27,25,.55);opacity:0;transition:opacity .45s}
+.sheet.on .shade{opacity:1}
+.sbody{position:absolute;left:0;right:0;top:18px;bottom:0;background:var(--cream);color:var(--ink);border-radius:34px 40px 0 0;overflow-y:auto;overscroll-behavior:contain;transform:translateY(105%);transition:transform .6s cubic-bezier(.7,0,.2,1)}
+.sheet.on .sbody{transform:none;transition:transform .75s cubic-bezier(.16,1.12,.3,1)}
+.stop{position:relative;background:var(--cc);color:var(--ct);padding:44px 0 190px;border-radius:34px 40px 0 0}
+.sClose{position:absolute;right:28px;top:26px;width:58px;height:58px;border-radius:50%;border:0;background:var(--ink);color:var(--cream);display:grid;place-items:center;cursor:pointer;z-index:3;transition:transform .45s cubic-bezier(.2,1.6,.4,1)}
+.sClose:hover{transform:rotate(90deg) scale(1.08)}
+.sClose:focus-visible{outline:3px dashed var(--ink);outline-offset:4px}
+.sKick{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.sKick .disp{font-size:16px;letter-spacing:.08em}
+.sTag{font:800 13px/1 'Archivo',sans-serif;font-stretch:110%;text-transform:uppercase;letter-spacing:.04em;padding:8px 12px 7px;border-radius:999px;background:var(--ink);color:var(--cream)}
+.sName{font-family:'Archivo',sans-serif;font-weight:800;font-stretch:125%;letter-spacing:-.04em;font-size:clamp(52px,9vw,170px);line-height:.86;margin:0;max-width:1200px}
+.sVoz{font:400 30px/1.1 'Gochi Hand',cursive;margin:22px 0 0;transform:rotate(-1.5deg);transform-origin:left}
+.sCover{position:relative;margin:-150px auto 0;max-width:1180px;padding:0 40px;z-index:2}
+.frame{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(21,27,25,.28)}
+.frame img{display:block;width:100%;height:auto}
+.sCover .frame{transform:rotate(-1deg)}
+.sInfo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:80px 0 70px;padding-bottom:40px;border-bottom:2px solid var(--ink)}
+.sInfo dt{font:400 14px/1 'Anton',sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;opacity:.65}
+.sInfo dd{margin:0;font:800 21px/1.2 'Archivo',sans-serif;font-stretch:108%;overflow-wrap:anywhere}
+.sInfo dd a{color:inherit;text-decoration-thickness:2px;text-underline-offset:4px}
+.sStory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.sStory h3{font-size:30px;margin:0 0 12px}
+.fill{font-size:17px;line-height:1.55;margin:0;padding:16px 18px;border:2px dashed rgba(33,44,41,.35);border-radius:14px;color:rgba(33,44,41,.75)}
+.sGal{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:30px;align-items:start;margin:80px 0}
+.sGal .frame:nth-child(1){transform:rotate(1.2deg)}
+.sGal .frame:nth-child(2){transform:rotate(-2deg);margin-top:60px}
+.sGal .frame:only-child{grid-column:1 / -1}
+.sGal .phc{aspect-ratio:16/10;background:var(--cc);display:grid;place-items:center}
+.sGal .phc img{width:34%;transform:rotate(-8deg)}
+.sFoot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:36px 0 60px;border-top:2px solid var(--ink)}
+.sNext{background:none;border:0;padding:0;cursor:pointer;text-align:right;color:var(--ink);font-family:inherit}
+.sNext small{display:block;font:400 24px/1 'Gochi Hand',cursive;margin-bottom:6px}
+.sNext strong{display:inline-flex;align-items:center;gap:14px;font:800 clamp(34px,4vw,64px)/1 'Archivo',sans-serif;font-stretch:125%;letter-spacing:-.035em;transition:font-stretch .5s,color .2s}
+.sNext:hover strong{font-stretch:70%;color:var(--blue)}
+
+@media (max-width:980px){
+.pols{opacity:.35;right:-120px}
+.row{grid-template-columns:48px minmax(0,1fr) 54px}
+.rmeta{grid-column:2 / 3}
+.rarr{grid-row:1;grid-column:3}
+.sInfo{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sStory{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+.chero{padding:120px 0 80px;min-height:0}
+.chTitle{font-size:clamp(44px,13vw,64px);max-width:none}
+.chSub{font-size:17px;margin-top:22px}
+.chNum{font-size:96px}
+.chCount{margin-top:34px}
+.chCobs{grid-template-columns:repeat(3,80px);right:-50px;bottom:-40px;opacity:.9}
+.chCobs img{width:80px;height:80px}
+.pols{position:relative;right:auto;top:auto;width:auto;height:430px;margin:40px 14px 0;opacity:1;transform:none}
+.pol{width:min(190px,48vw);padding:7px 7px 0}
+.pol span{font-size:17px;padding:7px 2px 9px}
+.clist{padding:60px 0 80px}
+.filters{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px 30px;padding:6px 14px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.fchip{flex:none;min-height:44px;padding:0 15px;font-size:15px}
+.flab{flex:none}
+.rows{border-top:0}
+.row{grid-template-columns:minmax(0,1fr) 46px;gap:10px 14px;padding:16px 0 22px}
+.row:hover,.row:focus-visible{padding-left:0}
+.row::before{display:none}
+.rthumb{display:block;grid-column:1 / -1;position:relative;border-radius:14px;overflow:hidden;background:var(--cc);aspect-ratio:16/10;margin-bottom:8px;box-shadow:0 14px 30px rgba(21,27,25,.18)}
+.rthumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.rthumb .phc{width:100%;height:100%;display:grid;place-items:center}
+.rthumb .phc img{width:38%;height:auto;transform:rotate(-8deg)}
+.rnum{position:absolute;left:12px;top:30px;z-index:2;background:var(--cream);padding:7px 9px 6px;border-radius:999px;font-size:16px}
+.rname{font-size:clamp(34px,10vw,48px);grid-column:1 / 2}
+.row:hover .rname{font-stretch:125%;font-weight:800;letter-spacing:-.035em}
+.rmeta{grid-column:1 / -1}
+.rarr{grid-row:2;grid-column:2;width:46px;height:46px}
+.row.ph .rname{-webkit-text-stroke:1.2px var(--ink)}
+.peek{display:none}
+.cnext{padding:80px 0}
+.cnStk{width:84px}.cnStk.b{width:76px}
+.cnext .hand{font-size:22px}
+.sbody{top:10px;border-radius:24px 24px 0 0}
+.stop{padding:30px 0 120px;border-radius:24px 24px 0 0}
+.sClose{right:14px;top:14px;width:50px;height:50px}
+.sKick{padding-right:60px}
+.sVoz{font-size:23px}
+.sCover{margin-top:-96px;padding:0 14px}
+.sInfo{gap:20px;margin:46px 0 40px}
+.sInfo dd{font-size:18px}
+.sGal{grid-template-columns:1fr;margin:46px 0}
+.sGal .frame:nth-child(2){margin-top:0}
+}
+@media (prefers-reduced-motion:reduce){
+.pol{animation:none;opacity:1}
+.row,.rname,.row::before,.sbody,.peekIn{transition:none}
+}
+</style>
+</helmet>
+<div class="{{rootCls}}" ref="{{setRoot}}" style="--ho: 1">
+
+<header class="{{hdrCls}}">
+<div class="hin">
+<button type="button" class="{{mbtnCls}}" aria-label="{{menuAria}}" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}">
+<svg class="mblob" viewBox="0 0 100 100" aria-hidden="true"><polygon points="{{blobPts}}" fill="#F2673C"></polygon></svg>
+<span class="mtxt">menu</span>
+</button>
+<a class="hlogo" href="index.html" aria-label="Sotaque, voltar ao início">
+<svg viewBox="0 0 396 168" aria-hidden="true"><g fill="currentColor" fill-rule="evenodd">%%STQ%%</g></svg>
+</a>
+<a class="zap" href="https://wa.me/55XXXXXXXXXXX" aria-label="Conversar no WhatsApp"><span class="zlab">bora conversar?</span>
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4a9.6 9.6 0 0 0-8.3 14.4L2.4 21.6l4.9-1.3A9.6 9.6 0 1 0 12 2.4z" fill="currentColor"></path><path d="M8.7 7.5c.3-.3.8-.3 1 .1l.9 1.7c.2.3.1.7-.1 1l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.3-.3.7-.3 1-.1l1.7.9c.4.2.4.7.1 1l-.7.8c-.6.6-1.5.8-2.3.4-2.1-1-3.8-2.7-4.8-4.8-.4-.8-.2-1.7.4-2.3z" class="hs"></path></svg></a>
+</div>
+</header>
+
+<nav class="{{ddCls}}" aria-label="Menu principal" aria-hidden="{{menuHidden}}">
+<a class="ddi" href="index.html#fazemos" tabIndex="{{tabi}}" onClick="{{closeMenu}}"><span class="ddimg" style="background: #F84A48"><img src="/_blob/2ea66deb8e51cca6bae3ecb958f1262c" alt=""></span><span><span class="ddtag" style="background: #F84A48">áreas</span><span class="ddt">O que fazemos</span></span></a>
+<a class="ddi" href="#lista" tabIndex="{{tabi}}" onClick="{{closeMenu}}"><span class="ddimg" style="background: #E5CB5A"><img src="/_blob/11de9fbf1aa15334d6a60bdfa27ee2ba" alt=""></span><span><span class="ddtag" style="background: #E5CB5A">portfólio</span><span class="ddt">Todos os cases</span></span></a>
+<a class="ddi" href="index.html#quem" tabIndex="{{tabi}}" onClick="{{closeMenu}}"><span class="ddimg" style="background: #76AFF3"><img src="/_blob/40dc5e97d35b321a300924cd0bbcfc7e" alt=""></span><span><span class="ddtag" style="background: #76AFF3">a turma</span><span class="ddt">Quem somos</span></span></a>
+<a class="ddi" href="index.html#contato" tabIndex="{{tabi}}" onClick="{{closeMenu}}"><span class="ddimg" style="background: #B1AED9"><img src="/_blob/d55a11df47b4359240fb8225a3c01ac0" alt=""></span><span><span class="ddtag" style="background: #B1AED9">bora?</span><span class="ddt">Contato</span></span></a>
+<a class="btn ddbtn" href="https://wa.me/55XXXXXXXXXXX" tabIndex="{{tabi}}">Fala com a gente
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+</nav>
+
+<main class="cp">
+<section class="chero" data-theme="dark" data-sc="par" aria-labelledby="ch-t">
+<div class="chCobs" aria-hidden="true">
+<sc-for list="{{cobs}}" as="c" hint-placeholder-count="12"><img src="{{c}}" alt=""></sc-for>
+</div>
+
+<div class="wrap">
+<span class="chip" style="background: #E5CB5A; color: #212C29">portfólio</span>
+<h1 id="ch-t" class="wide chTitle">Cada marca fala do seu <span class="co">jeito.<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M150 8 C 260 6, 296 40, 290 66 C 282 102, 190 116, 120 112 C 46 108, 4 86, 10 56 C 16 26, 80 10, 168 12 C 196 13, 218 15, 236 19" pathLength="1" fill="none" stroke="#F5ECDC" stroke-width="3" stroke-linecap="round"></path></svg></span></h1>
+<p class="chSub">Sites, lojas, redes e marcas que a gente ajudou a soar. Escolhe um e abre pra ver de perto.</p>
+<div class="chCount">
+<span class="chNum">{{liveTxt}}</span>
+<span class="chLab">cases no ar<span class="hand">+{{soonTxt}} chegando por aí</span></span>
+</div>
+</div>
+<div class="pols" aria-label="Destaques">
+<sc-for list="{{pols}}" as="p" hint-placeholder-count="5">
+<a class="pol" href="{{p.href}}" onClick="{{p.open}}" style="left: {{p.x}}%; top: {{p.y}}%; --r: {{p.r}}deg; --z: {{p.z}}; --dl: {{p.dl}}s"><i class="tp" aria-hidden="true"></i><img src="{{p.img}}" alt=""><span>{{p.n}}</span></a>
+</sc-for>
+</div>
+</section>
+
+<section id="lista" class="clist" data-theme="light" aria-label="Lista de cases">
+<div class="wrap">
+<div class="filters" role="group" aria-label="Filtrar cases">
+<span class="flab" aria-hidden="true">filtra aí:</span>
+<sc-for list="{{chips}}" as="f" hint-placeholder-count="6">
+<button type="button" class="{{f.cls}}" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.t}}<sup>{{f.n}}</sup></button>
+</sc-for>
+</div>
+<div class="{{rowsCls}}" onMouseLeave="{{rowsOut}}">
+<sc-for list="{{rows}}" as="c" hint-placeholder-count="8">
+<a class="{{c.cls}}" href="{{c.href}}" onClick="{{c.open}}" onMouseEnter="{{c.enter}}" onFocus="{{c.enter}}" style="--cc: {{c.color}}; --ct: {{c.text}}">
+<span class="rthumb" aria-hidden="true"><sc-if value="{{c.ph}}" hint-placeholder-val="{{ false }}"><span class="phc"><img src="{{c.pet}}" alt=""></span></sc-if><sc-if value="{{c.real}}" hint-placeholder-val="{{ true }}"><img src="{{c.img}}" alt=""></sc-if></span>
+<span class="rnum">{{c.num}}</span>
+<span class="rname">{{c.n}}</span>
+<span class="rmeta"><span class="rsvc">{{c.svc}}</span><span class="rvoz">sotaque: {{c.voz}}</span><sc-if value="{{c.by}}" hint-placeholder-val="{{ false }}"><span class="rby">{{c.by}}</span></sc-if><sc-if value="{{c.ph}}" hint-placeholder-val="{{ false }}"><span class="rph">[placeholder, trocar pelo case real]</span></sc-if></span>
+<span class="rarr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section class="cnext" data-theme="light" aria-labelledby="cn-t">
+<img class="cnStk a" src="/_blob/40dc5e97d35b321a300924cd0bbcfc7e" alt="" aria-hidden="true">
+<img class="cnStk b" src="/_blob/2ea66deb8e51cca6bae3ecb958f1262c" alt="" aria-hidden="true">
+<div class="wrap">
+<h2 id="cn-t" class="disp">O próximo case<br>pode ser o seu.</h2>
+<p class="hand">Bora achar o sotaque da sua marca?</p>
+<a class="btn" href="https://wa.me/55XXXXXXXXXXX" style="min-height: 60px; font-size: 18px; padding: 0 30px">Chama no WhatsApp
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+</div>
+</section>
+</main>
+
+<div class="{{peekCls}}" ref="{{setPeek}}" aria-hidden="true">
+<div class="peekIn" style="--pr: {{peekRot}}deg">
+<div class="bar"><i></i><i></i><i></i><b></b></div>
+<div class="pimgs">
+<sc-for list="{{peeks}}" as="p" hint-placeholder-count="8">
+<sc-if value="{{p.real}}" hint-placeholder-val="{{ true }}"><img class="{{p.cls}}" src="{{p.img}}" alt=""></sc-if>
+<sc-if value="{{p.ph}}" hint-placeholder-val="{{ false }}"><span class="{{p.pcls}}" style="background: {{p.color}}"><img src="{{p.pet}}" alt=""></span></sc-if>
+</sc-for>
+</div>
+</div>
+</div>
+
+<footer class="foot" data-theme="light">
+<div class="tabs" aria-hidden="true"><div class="tab t1"></div><div class="tab t2"></div></div>
+<div class="fpanel">
+<div class="fgrid">
+<div>
+<img class="fmark" src="/_blob/bd0b928ddf20a0853db4df4116637757" alt="Sotaque">
+<p class="hand" style="font-size: 25px; margin: 18px 0 0; color: #E5CB5A">sua marca é seu sotaque.</p>
+</div>
+<div>
+<p class="disp flabel">Contato</p>
+<a class="fmail" href="mailto:contato@sotaqueagencia.com">contato@sotaqueagencia.com</a>
+<div class="socials">
+<a class="soc" href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg></a>
+<a class="soc" href="#" aria-label="Behance"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h5a3 3 0 0 1 0 6H3zM3 12h6a3 3 0 0 1 0 6H3zM14 7h6M14 14.5h7a3.5 3.5 0 1 0-1 2.5"></path></svg></a>
+<a class="soc" href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v11M5 4.5v.5M10 20v-6a3 3 0 0 1 6 0v6M10 9v11"></path></svg></a>
+</div>
+</div>
+<div>
+<p class="disp flabel">Navegue</p>
+<nav class="flinks" aria-label="Rodapé">
+<a href="index.html#fazemos">O que fazemos</a>
+<a href="#lista">Cases</a>
+<a href="index.html#quem">Quem somos</a>
+<a href="index.html#contato">Contato</a>
+</nav>
+</div>
+</div>
+<div class="fbottom">
+<span>© 2026 Sotaque Agência</span>
+<span>Feito com sotaque em Recife</span>
+</div>
+</div>
+</footer>
+
+<div class="{{sheetCls}}" role="dialog" aria-modal="true" aria-hidden="{{sheetHidden}}" aria-label="{{sheetLabel}}">
+<div class="shade" onClick="{{closeCase}}"></div>
+<div class="sbody" ref="{{setSheet}}" style="--cc: {{cur.color}}; --ct: {{cur.text}}">
+<div class="stop">
+<button type="button" class="sClose" onClick="{{closeCase}}" aria-label="Fechar case" tabIndex="{{stabi}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<div class="wrap">
+<div class="sKick"><span class="disp">case {{cur.num}} / {{totalTxt}}</span><sc-for list="{{cur.tagList}}" as="t" hint-placeholder-count="2"><span class="sTag">{{t}}</span></sc-for></div>
+<h2 class="sName">{{cur.n}}</h2>
+<p class="sVoz">o sotaque da marca: {{cur.voz}}</p>
+</div>
+</div>
+<div class="sCover">
+<div class="frame"><div class="bar"><i></i><i></i><i></i><b></b></div>
+<sc-if value="{{cur.real}}" hint-placeholder-val="{{ true }}"><img src="{{cur.img}}" alt="{{cur.alt}}"></sc-if>
+<sc-if value="{{cur.ph}}" hint-placeholder-val="{{ false }}"><div class="sGal"><div class="phc" style="grid-column: 1 / -1; aspect-ratio: 16/8"><img src="{{cur.pet}}" alt=""></div></div></sc-if>
+</div>
+</div>
+<div class="wrap">
+<dl class="sInfo">
+<div><dt>Cliente</dt><dd>{{cur.n}}</dd></div>
+<div><dt>O que fizemos</dt><dd>{{cur.svc}}</dd></div>
+<div><dt>Status</dt><dd>{{cur.status}}</dd></div>
+<div><dt>Ver ao vivo</dt><dd><sc-if value="{{cur.url}}" hint-placeholder-val="{{ true }}"><a href="{{cur.url}}" target="_blank" rel="noopener" tabIndex="{{stabi}}">{{cur.urlTxt}} ↗</a></sc-if><sc-if value="{{cur.noUrl}}" hint-placeholder-val="{{ false }}">em breve</sc-if></dd></div>
+</dl>
+<div class="sStory">
+<div><h3 class="disp">O desafio</h3><p class="fill">{{cur.d1}}</p></div>
+<div><h3 class="disp">O que a gente fez</h3><p class="fill">{{cur.d2}}</p></div>
+<div><h3 class="disp">Resultado</h3><p class="fill">{{cur.d3}}</p></div>
+</div>
+<div class="sGal">
+<sc-for list="{{cur.gal}}" as="g" hint-placeholder-count="2">
+<div class="frame"><div class="bar"><i></i><i></i><i></i><b></b></div><img src="{{g}}" alt="" loading="lazy"></div>
+</sc-for>
+</div>
+<div class="sFoot">
+<button type="button" class="btn soft" onClick="{{closeCase}}" tabIndex="{{stabi}}">← Voltar pra lista</button>
+<button type="button" class="sNext" onClick="{{nextCase}}" tabIndex="{{stabi}}"><small>próximo case</small><strong>{{nxt.n}} <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3450}}'>
+class Component extends DCLogic {
+  rnd(n) { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+  data() {
+    const P = { siam: '/_blob/40dc5e97d35b321a300924cd0bbcfc7e', pug: '/_blob/11de9fbf1aa15334d6a60bdfa27ee2ba', cat: '/_blob/2ea66deb8e51cca6bae3ecb958f1262c', iara: '/_blob/d55a11df47b4359240fb8225a3c01ac0' };
+    const fill = (t) => '[' + t + ']';
+    return [
+      { id: 'instituto-colinas', n: 'Instituto Colinas', tags: ['site'], tagList: ['Site'], svc: 'Site institucional', voz: 'acolhedor e brincalhão', color: '#4BBFE8', text: '#212C29', img: '/_blob/e2d6edd6d4af2ba352b351f442585422', gal: ['/_blob/cae19a6560a91ee2782eb2f94a983e10'], url: 'https://institutocolinas.com.br/', urlTxt: 'institutocolinas.com.br', status: 'No ar', alt: 'Página inicial do site do Instituto Colinas',
+        d1: fill('Contar o desafio: o que o Instituto precisava comunicar e pra quem (doadores, padrinhos, comunidade de Osasco)'), d2: fill('Contar a solução: estrutura do site, tom de voz, doação e apadrinhamento em destaque'), d3: fill('Resultado: doações, acessos, depoimentos do time do Instituto') },
+      { id: 'casal-corretor', n: 'Casal Corretor', tags: ['social', 'site'], tagList: ['Social media', 'Site'], svc: 'Social media + site', voz: 'próximo e confiável', color: '#C9A46A', text: '#212C29', img: '/_blob/31361af32180ec157f8c53570dc95bcc', gal: ['/_blob/938f7f53ab5f173b94d88cc57bdfa6fe'], url: 'https://www.instagram.com/casalcorretoroficial/', urlTxt: '@casalcorretoroficial', status: 'Redes rodando · site em produção', alt: 'Grade do Instagram do Casal Corretor com fotos de imóveis',
+        d1: fill('Contar o desafio: como se destacar na curadoria de imóveis em São Paulo'), d2: fill('Contar a solução: linha editorial, vídeos de tour, "vendido" como selo, site em desenvolvimento'), d3: fill('Resultado: números do Instagram (alcance, seguidores, contatos, imóveis vendidos)') },
+      { id: 'musa', n: 'Musa', tags: ['site'], tagList: ['Site', 'Grande marca'], svc: 'Site institucional', voz: 'sóbrio e técnico', color: '#F6C9A6', text: '#212C29', img: '/_blob/cb2488f2d15b11dc293f1945c3d09e58', gal: ['/_blob/1379b1746053d3c002956fd49e6a0ce0', '/_blob/06a899d239e9c25520caa23eda4b04d7'], url: 'https://www.musa.co/', urlTxt: 'musa.co', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial do site da Musa, gestão de resíduos',
+        d1: fill('Contar o desafio: apresentar uma solução de resíduos B2B para grandes empresas'), d2: fill('Contar a solução: desenvolvimento, animações, plataforma, integrações'), d3: fill('Resultado: performance, leads, prazo de entrega') },
+      { id: 'aika', n: 'Aiká Body & Soul', tags: ['ecommerce'], tagList: ['E-commerce'], svc: 'E-commerce', voz: 'calmo e sensorial', color: '#A9CF84', text: '#212C29', img: '/_blob/5cfae1c701f2ee9096b8131f5af151ea', gal: ['/_blob/adb028e91baa79645007f8b802b1a6cc'], url: 'https://www.aikabodysoul.com/', urlTxt: 'aikabodysoul.com', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial da loja Aiká Body & Soul',
+        d1: fill('Contar o desafio: vender produtos naturais com a mesma calma da marca'), d2: fill('Contar a solução: loja, catálogo por ritual, captura de e-mail, frete'), d3: fill('Resultado: conversão, ticket médio, vendas') },
+      { id: 'scaffold-play', n: 'Scaffold Play', tags: ['ecommerce', 'site'], tagList: ['E-commerce', 'Plataforma'], svc: 'Plataforma + e-commerce', voz: 'direto e pixelado', color: '#5FD068', text: '#212C29', img: '/_blob/3f6c2cbb3c9038d99355a6c862f3d517', gal: ['/_blob/11dcb9f86e646d6d861831db98f2cdea'], url: 'https://scaffoldplay.com.br/', urlTxt: 'scaffoldplay.com.br', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial da Scaffold Play',
+        d1: fill('Contar o desafio: vender trilhas de aprendizado pra líderes'), d2: fill('Contar a solução: trilhas, eventos, área do aluno, checkout'), d3: fill('Resultado: inscrições, eventos, alunos') },
+      { id: 'fernando-advogados', n: 'Fernando Advogados', tags: ['branding', 'site'], tagList: ['Branding', 'Site'], svc: 'Branding + site', voz: 'sério, mas gente boa', color: '#305A9A', text: '#F5ECDC', pet: P.siam, ph: true, gal: [], status: '[placeholder]',
+        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') },
+      { id: 'maria-cecilia-makeup', n: 'Maria Cecilia Makeup', tags: ['social'], tagList: ['Social media'], svc: 'Gestão de redes', voz: 'vaidoso e divertido', color: '#B1AED9', text: '#212C29', pet: P.cat, ph: true, gal: [], status: '[placeholder]',
+        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') },
+      { id: 'alt-marketing', n: 'Alt Marketing', tags: ['campanha', 'social'], tagList: ['Campanha'], svc: 'Campanha digital', voz: 'ousado e rápido', color: '#F84A48', text: '#212C29', pet: P.pug, ph: true, gal: [], status: '[placeholder]',
+        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') }
+    ];
+  }
+  componentDidMount() {
+    this.mx = 0; this.my = 0; this.px = 0; this.py = 0; this.tx = 0; this.ty = 0;
+    this._mm = (e) => {
+      this.tx = e.clientX; this.ty = e.clientY;
+      this.mx = (e.clientX / window.innerWidth - 0.5); this.my = (e.clientY / window.innerHeight - 0.5);
+    };
+    window.addEventListener('pointermove', this._mm, { passive: true });
+    this._kd = (e) => {
+      const st = this.state || {};
+      if (e.key === 'Escape') { if (st.open != null) this.closeCase(); else if (st.menu) this.setState({ menu: false }); }
+      if (st.open != null && (e.key === 'ArrowRight')) this.go(1);
+      if (st.open != null && (e.key === 'ArrowLeft')) this.go(-1);
+    };
+    window.addEventListener('keydown', this._kd);
+    this._hc = () => this.fromHash();
+    window.addEventListener('hashchange', this._hc);
+    const loop = () => {
+      this.fx();
+      this.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+    setTimeout(() => this.setState({ ready: true }), 60);
+    this.fromHash();
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('pointermove', this._mm);
+    window.removeEventListener('keydown', this._kd);
+    window.removeEventListener('hashchange', this._hc);
+    document.documentElement.style.overflow = '';
+  }
+  fromHash() {
+    const h = (location.hash || '').replace('#', '');
+    const i = this.data().findIndex((c) => c.id === h);
+    if (i >= 0) this.openCase(i, true);
+  }
+  openCase(i, noHash) {
+    this._lastFocus = document.activeElement;
+    document.documentElement.style.overflow = 'hidden';
+    this.setState({ open: i, menu: false, hov: null });
+    if (!noHash && history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
+    setTimeout(() => { if (this.sheet) { this.sheet.scrollTop = 0; const b = this.sheet.querySelector('.sClose'); if (b) b.focus({ preventScroll: true }); } }, 80);
+  }
+  closeCase() {
+    document.documentElement.style.overflow = '';
+    this.setState({ open: null });
+    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    if (this._lastFocus && this._lastFocus.focus) this._lastFocus.focus({ preventScroll: true });
+  }
+  go(d) {
+    const n = this.data().length;
+    const st = this.state || {};
+    const i = ((st.open || 0) + d + n) % n;
+    this.setState({ open: i });
+    if (history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
+    if (this.sheet) this.sheet.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  fx() {
+    const root = this.root;
+    if (!root) return;
+    const vh = window.innerHeight;
+    const isCanvas = vh > 1900;
+    if (isCanvas !== !!(this.state || {}).canvas) this.setState({ canvas: isCanvas });
+    const pols = root.querySelector('.pols');
+    if (pols) { pols.style.setProperty('--mx', (this.mx * 26).toFixed(2)); pols.style.setProperty('--my', (this.my * 20).toFixed(2)); }
+    const par = root.querySelectorAll('[data-sc="par"]');
+    for (let i = 0; i < par.length; i++) {
+      const r = par[i].getBoundingClientRect();
+      par[i].style.setProperty('--q', isCanvas ? '0' : Math.max(-1.2, Math.min(1.2, (r.top + r.height / 2 - vh / 2) / vh)).toFixed(4));
+    }
+    if (this.peek) {
+      this.px += (this.tx - this.px) * 0.16; this.py += (this.ty - this.py) * 0.16;
+      this.peek.style.setProperty('--px', (this.px + 28).toFixed(1) + 'px');
+      this.peek.style.setProperty('--py', (this.py - 150).toFixed(1) + 'px');
+    }
+    const secs = root.querySelectorAll('[data-theme]');
+    let th = 'dark';
+    for (let i = 0; i < secs.length; i++) {
+      const r = secs[i].getBoundingClientRect();
+      if (r.top <= 46 && r.bottom > 46) th = secs[i].getAttribute('data-theme');
+    }
+    if ((this.state || {}).hdr !== th) this.setState({ hdr: th });
+  }
+  renderVals() {
+    const st = this.state || {};
+    if (!this._setRoot) {
+      this._setRoot = (el) => { this.root = el; };
+      this._setPeek = (el) => { this.peek = el; };
+      this._setSheet = (el) => { this.sheet = el; };
+      const bp = [];
+      for (let i = 0; i < 22; i++) {
+        const a = (Math.PI * 2 * i) / 22;
+        const r = i % 2 === 0 ? 47 + this.rnd(i) * 3 : 26 + this.rnd(i + 9) * 8;
+        bp.push((50 + r * Math.cos(a)).toFixed(1) + ',' + (50 + r * Math.sin(a)).toFixed(1));
+      }
+      this._blobPts = bp.join(' ');
+    }
+    const D = this.data();
+    const menu = !!st.menu;
+    const flt = st.f || 'all';
+    const filters = [['all', 'Tudo'], ['site', 'Sites'], ['ecommerce', 'E-commerce'], ['social', 'Social media'], ['branding', 'Branding'], ['campanha', 'Campanha']];
+    this._pick = this._pick || {};
+    this._open = this._open || {};
+    this._enter = this._enter || {};
+    const chips = filters.map(([k, t]) => {
+      if (!this._pick[k]) this._pick[k] = () => this.setState({ f: k, hov: null });
+      return { t: t, n: String(k === 'all' ? D.length : D.filter((c) => c.tags.indexOf(k) >= 0).length).padStart(2, '0'), cls: 'fchip' + (flt === k ? ' on' : ''), on: flt === k ? 'true' : 'false', pick: this._pick[k] };
+    });
+    const hov = st.hov;
+    const rows = D.map((c, i) => {
+      if (!this._open[i]) this._open[i] = (e) => { if (e && e.preventDefault) e.preventDefault(); this.openCase(i); };
+      if (!this._enter[i]) this._enter[i] = () => { if ((this.state || {}).hov !== i) this.setState({ hov: i, pr: Math.round((this.rnd(i * 7 + Date.now() % 97) - 0.5) * 16) }); };
+      const vis = flt === 'all' || c.tags.indexOf(flt) >= 0;
+      return Object.assign({}, c, { num: String(i + 1).padStart(2, '0'), href: '#' + c.id, real: !c.ph, ph: !!c.ph, by: c.by || '', cls: 'row' + (c.ph ? ' ph' : '') + (vis ? '' : ' hide') + (hov === i ? ' act' : ''), open: this._open[i], enter: this._enter[i] });
+    });
+    const peeks = D.map((c, i) => ({ real: !c.ph, ph: !!c.ph, img: c.img || '', pet: c.pet || '', color: c.color, cls: hov === i ? 'on' : '', pcls: 'phc' + (hov === i ? ' on' : '') }));
+    const pp = [[34, 0, -7, 1.2], [0, 22, 6, 0.6], [44, 40, -3, 1.6], [6, 60, -9, 0.9], [52, 74, 8, 1.3]];
+    const pols = D.filter((c) => !c.ph).slice(0, 5).map((c, k) => {
+      const i = D.indexOf(c);
+      return { n: c.n, img: c.img, href: '#' + c.id, open: this._open[i], x: pp[k][0], y: pp[k][1], r: pp[k][2], z: pp[k][3], dl: (0.25 + k * 0.12).toFixed(2) };
+    });
+    const cobIds = ['70bd52bb5160922f31c8b2d0c9d582c4', '8e7ba68d942e8214a78b47bf3844f949', '34ffd6b8362b18547d6dad7d7e3fe395', 'fd81411634845b5fca7531c20a69b067', '0caab66028b7790e937731a5223c1c95', '7938f17fe6bf53296af3357ec2ec7340', '9fc56471b76e0cd835044f656886f00c', '67f1b25f723e1456d10b5295d6f5a35f', '21dd5b4bb90179cd678e9a7cf63b24db', 'd28c48734c193699e0b8cd15ecc45063', 'd5d2e6a9dd7b67c8bfeb1f9427cb2376', 'c30d4b8baf59994da91c5da5054900e5'];
+    const oi = st.open;
+    const isOpen = oi != null;
+    const cc = D[isOpen ? oi : 0];
+    const cur = Object.assign({}, cc, { num: String((isOpen ? oi : 0) + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
+    const nxt = D[((isOpen ? oi : 0) + 1) % D.length];
+    const live = D.filter((c) => !c.ph).length;
+    return {
+      setRoot: this._setRoot, setPeek: this._setPeek, setSheet: this._setSheet,
+      rootCls: 'stq cpage' + (st.canvas ? ' static' : '') + (st.ready ? ' ready' : ''),
+      hdrCls: 'hdr ' + (st.hdr || 'dark') + ((st.hdr || 'dark') === 'dark' ? '' : ' grad'),
+      mbtnCls: 'mbtn' + (menu ? ' on' : ''),
+      blobPts: this._blobPts,
+      menuAria: menu ? 'Fechar menu' : 'Abrir menu',
+      menuOpen: menu,
+      ddCls: 'dd' + (menu ? ' on' : ''),
+      menuHidden: menu ? 'false' : 'true',
+      tabi: menu ? 0 : -1,
+      toggleMenu: () => this.setState({ menu: !(this.state || {}).menu }),
+      closeMenu: () => this.setState({ menu: false }),
+      cobs: cobIds.map((x) => '/_blob/' + x),
+      pols: pols,
+      liveTxt: String(live).padStart(2, '0'),
+      soonTxt: String(D.length - live),
+      chips: chips,
+      rows: rows,
+      rowsCls: 'rows' + (hov != null ? ' dim' : ''),
+      rowsOut: () => this.setState({ hov: null }),
+      peekCls: 'peek' + (hov != null && !isOpen ? ' on' : ''),
+      peekRot: st.pr || -5,
+      peeks: peeks,
+      sheetCls: 'sheet' + (isOpen ? ' on' : ''),
+      sheetHidden: isOpen ? 'false' : 'true',
+      sheetLabel: 'Case ' + cc.n,
+      stabi: isOpen ? 0 : -1,
+      cur: cur,
+      nxt: nxt,
+      totalTxt: String(D.length).padStart(2, '0'),
+      closeCase: () => this.closeCase(),
+      nextCase: () => this.go(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -142,8 +142,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 .kw{position:relative;display:inline-flex;white-space:nowrap}
 .ch{display:inline-block;transform-origin:50% 85%;--lp:clamp(0, calc((var(--p) + .04 - var(--s) - var(--of) * .3) * 14), 1);transform:scale(calc(.12 + var(--lp) * .88 + var(--lp) * (1 - var(--lp)) * .9));opacity:clamp(0, calc(var(--lp) * 6), 1)}
 .l1{--s:0}.l2{--s:.44;color:var(--coral)}
-.ring{position:absolute;left:-14%;top:-18%;width:128%;height:136%;overflow:visible;pointer-events:none;--d:clamp(0, calc((var(--p) - .86) * 7), 1)}
-.loop{position:absolute;right:5%;top:40%;width:250px;transform:rotate(8deg);overflow:visible;pointer-events:none;--d:clamp(0, calc((var(--p) - .32) * 4), 1);color:var(--ink)}
+.ring{position:absolute;left:-9%;top:2%;width:118%;height:110%;overflow:visible;pointer-events:none;--d:clamp(0, calc((var(--p) - .86) * 7), 1)}
 .kstick{position:absolute;width:130px;transform:scale(var(--sp)) rotate(-10deg);pointer-events:none;filter:drop-shadow(0 6px 0 rgba(0,0,0,.12))}
 .ks1{left:8%;top:14%;--sp:clamp(0, calc((var(--p) - .12) * 8), 1);width:150px}
 .ks2{right:7%;bottom:12%;--sp:clamp(0, calc((var(--p) - .55) * 8), 1);width:160px}
@@ -212,6 +211,10 @@ a{color:#212C29}a:hover{color:#305A9A}
 .big{position:absolute;width:115%;left:-8%;top:18%;transition:transform .6s cubic-bezier(.2,1.2,.3,1)}
 .case:hover .big{transform:rotate(-10deg) scale(1.08)}
 .tape{position:absolute;left:18px;top:22px;width:170px;transform:rotate(-6deg);z-index:2}
+.shot{position:absolute;left:9%;right:-14%;bottom:9%;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 20px 40px rgba(21,27,25,.35);transform:rotate(var(--sr,-4deg));transition:transform .55s cubic-bezier(.2,1.4,.35,1);z-index:1}
+.shot .sbar{display:block;height:15px;background:#ECE4D6}
+.shot img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.case:hover .shot{transform:rotate(0deg) translate(-6%,-8px) scale(1.05)}
 .ph{position:absolute;right:16px;bottom:14px;font:500 12px ui-monospace,Menlo,monospace;background:rgba(245,236,220,.92);color:var(--ink);padding:5px 9px;border-radius:6px;z-index:2}
 .cname{font-size:25px;margin:22px 0 4px}
 .ctype{font-family:'Archivo',sans-serif;font-stretch:75%;font-size:19px;color:rgba(245,236,220,.78);margin:0}
@@ -336,7 +339,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 .tiles .tl:nth-child(n+8){display:none}
 .pin{height:1700px}
 .kline{font-size:clamp(30px,9.4vw,52px);padding:0 14px}
-.loop{display:none}
+
 .ml{font-size:28px;flex-wrap:wrap;column-gap:.28em}
 .mstick{position:relative;left:auto;top:auto;width:1.5em;align-self:center;transform:scale(var(--lp)) rotate(-8deg)}
 .mlast{font-size:44px}
@@ -472,10 +475,9 @@ a{color:#212C29}a:hover{color:#305A9A}
 <span class="kw"><sc-for list="{{w.cs}}" as="c" hint-placeholder-count="4"><span class="ch" style="--dx: {{c.dx}}; --dy: {{c.dy}}; --r: {{c.r}}; --of: {{c.of}}">{{c.t}}</span></sc-for></span>
 </sc-for>
 </p>
-<svg class="loop draw" viewBox="0 0 400 140" aria-hidden="true"><path d="M10 120 C 60 20, 150 10, 170 70 C 185 120, 120 125, 130 80 C 140 30, 260 20, 330 60 M 316 40 L 334 62 L 306 70" pathLength="1" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 <p class="wide kline l2" aria-hidden="true">
 <sc-for list="{{k2}}" as="w" hint-placeholder-count="5">
-<span class="kw"><sc-for list="{{w.cs}}" as="c" hint-placeholder-count="4"><span class="ch" style="--dx: {{c.dx}}; --dy: {{c.dy}}; --r: {{c.r}}; --of: {{c.of}}">{{c.t}}</span></sc-for><sc-if value="{{w.ring}}" hint-placeholder-val="{{ false }}"><svg class="ring draw" viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M150 8 C 260 6, 296 40, 290 66 C 282 102, 190 116, 120 112 C 46 108, 4 86, 10 56 C 16 26, 80 10, 168 12 C 210 13, 240 18, 262 30" pathLength="1" fill="none" stroke="#212C29" stroke-width="3" stroke-linecap="round"></path></svg></sc-if></span>
+<span class="kw"><sc-for list="{{w.cs}}" as="c" hint-placeholder-count="4"><span class="ch" style="--dx: {{c.dx}}; --dy: {{c.dy}}; --r: {{c.r}}; --of: {{c.of}}">{{c.t}}</span></sc-for><sc-if value="{{w.ring}}" hint-placeholder-val="{{ false }}"><svg class="ring draw" viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M150 8 C 260 6, 296 40, 290 66 C 282 102, 190 116, 120 112 C 46 108, 4 86, 10 56 C 16 26, 80 10, 168 12 C 196 13, 218 15, 236 19" pathLength="1" fill="none" stroke="#212C29" stroke-width="3" stroke-linecap="round"></path></svg></sc-if></span>
 </sc-for>
 </p>
 <p class="kbody">Agência criativa de branding, social media, marketing digital e software. Nascida em Recife, com ouvido pra todo sotaque do Brasil.</p>
@@ -564,37 +566,37 @@ a{color:#212C29}a:hover{color:#305A9A}
 </div>
 <div style="max-width: 380px">
 <p style="font-size: 19px; line-height: 1.5; margin: 0 0 24px; color: rgba(245,236,220,.85)">Estratégias criativas que geram conexão, constroem reputação e entregam resultado.</p>
-<a class="btn light" href="#cases">Ver todos os cases
+<a class="btn light" href="cases.html">Ver todos os cases
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
 </div>
 </div>
 <div class="caseGrid">
-<a class="case" href="#cases" style="--fx: 440; --fr: -12; --fz: -2">
-<div class="panel" style="background: #305A9A">
-<img class="tape" src="/_blob/c50746958ddc81b158cab303c07cce7e" alt="Branding">
+<a class="case" href="cases.html#instituto-colinas" style="--fx: 440; --fr: -12; --fz: -2">
+<div class="panel" style="background: #76AFF3">
+<img class="tape" src="/_blob/4455b72f1a29e256a78e142e089e980a" alt="Site" style="width: 130px">
 <img class="big" src="/_blob/020aff19fa891cfcd70c4c03641b9590" alt="" aria-hidden="true">
-<span class="ph">[imagem do case]</span>
+<span class="shot"><i class="sbar"></i><img src="/_blob/e2d6edd6d4af2ba352b351f442585422" alt="Página inicial do site do Instituto Colinas"></span>
 </div>
-<h3 class="wide cname">Fernando Advogados</h3>
-<p class="ctype">Branding + Site</p>
+<h3 class="wide cname">Instituto Colinas</h3>
+<p class="ctype">Site institucional</p>
 </a>
-<a class="case" href="#cases" style="--fx: 0; --fr: 4; --fz: 1.5">
-<div class="panel" style="background: #B1AED9">
+<a class="case" href="cases.html#casal-corretor" style="--fx: 0; --fr: 4; --fz: 1.5">
+<div class="panel" style="background: #E5CB5A">
 <img class="tape" src="/_blob/8ec7663d0eff7470b275c5d516869bfa" alt="Redes sociais">
 <img class="big" src="/_blob/b86b903fd0f084e1964eba4313805d7c" alt="" aria-hidden="true" style="top: 22%">
-<span class="ph">[imagem do case]</span>
+<span class="shot" style="--sr: 3deg"><i class="sbar"></i><img src="/_blob/31361af32180ec157f8c53570dc95bcc" alt="Instagram do Casal Corretor"></span>
 </div>
-<h3 class="wide cname">Maria Cecilia Makeup</h3>
-<p class="ctype">Gestão de Redes</p>
+<h3 class="wide cname">Casal Corretor</h3>
+<p class="ctype">Social media + site</p>
 </a>
-<a class="case" href="#cases" style="--fx: -440; --fr: 14; --fz: -1">
+<a class="case" href="cases.html#musa" style="--fx: -440; --fr: 14; --fz: -1">
 <div class="panel" style="background: #F84A48">
-<img class="tape" src="/_blob/1cd323436f16d3a34337e59b6538d08f" alt="Campanha" style="width: 150px">
+<img class="tape" src="/_blob/4455b72f1a29e256a78e142e089e980a" alt="Site" style="width: 130px">
 <img class="big" src="/_blob/e5236393885015fd459871db0ab6c41d" alt="" aria-hidden="true" style="width: 90%; left: 18%; top: 26%">
-<span class="ph">[imagem do case]</span>
+<span class="shot" style="--sr: -2deg"><i class="sbar"></i><img src="/_blob/cb2488f2d15b11dc293f1945c3d09e58" alt="Página inicial do site da Musa"></span>
 </div>
-<h3 class="wide cname">Alt Marketing</h3>
-<p class="ctype">Campanha Digital</p>
+<h3 class="wide cname">Musa</h3>
+<p class="ctype">Site institucional</p>
 </a>
 </div>
 </div>
@@ -664,7 +666,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 <div class="ctaTapes disp" aria-hidden="true"><span>Ideias que conectam.</span><span>Marcas que funcionam.</span></div>
 <img class="ctaEye" src="/_blob/cf9d21f3d9778ddd763caa21ee2098f6" alt="" aria-hidden="true">
 <img class="ctaMega" src="/_blob/927a1da8053c35cc7e3e216863d22c13" alt="" aria-hidden="true">
-<h2 id="cta-t" class="wide h2" style="font-size: clamp(36px, 4.8vw, 70px)">Vamos dar o <span class="hl">próximo passo?<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M150 8 C 260 6, 296 40, 290 66 C 282 102, 190 116, 120 112 C 46 108, 4 86, 10 56 C 16 26, 80 10, 168 12 C 210 13, 240 18, 262 30" fill="none" stroke="#F84A48" stroke-width="3" stroke-linecap="round"></path></svg></span></h2>
+<h2 id="cta-t" class="wide h2" style="font-size: clamp(36px, 4.8vw, 70px)">Vamos dar o <span class="hl">próximo passo?<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M150 8 C 260 6, 296 40, 290 66 C 282 102, 190 116, 120 112 C 46 108, 4 86, 10 56 C 16 26, 80 10, 168 12 C 196 13, 218 15, 236 19" fill="none" stroke="#F84A48" stroke-width="3" stroke-linecap="round"></path></svg></span></h2>
 <p class="hand" style="font-size: 27px; line-height: 1.2; margin: 0 auto 30px; max-width: 520px">Conta pra gente sobre o seu projeto e como podemos ajudar.</p>
 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap">
 <a class="btn" href="https://wa.me/55XXXXXXXXXXX" style="min-height: 60px; font-size: 18px; padding: 0 30px">Chama no WhatsApp
@@ -695,7 +697,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 <p class="disp flabel">Navegue</p>
 <nav class="flinks" aria-label="Rodapé">
 <a href="#fazemos">O que fazemos</a>
-<a href="#cases">Cases</a>
+<a href="cases.html">Cases</a>
 <a href="#quem">Quem somos</a>
 <a href="#contato">Contato</a>
 </nav>
@@ -1230,7 +1232,7 @@ class Component extends DCLogic {
       ldTiles: this._ldt || (this._ldt = Array.from({ length: 100 }, (_, i) => ({ a: ['/_blob/534ee6290a928b37c02bf2c3e49a95f5','/_blob/a980e23f3ecf0408b9c8f0bb0fab90e1','/_blob/050975781194fdb24b25c855a1d0bb31','/_blob/d9a53532dc999f49c967d9e7894c3c97','/_blob/1eb89154bfc4a2d3e6ae00feb738c212','/_blob/39d4b574e0ef16cf8b23c8ab83a55997','/_blob/2c79a3d68e653c9bddd23e05b08d7f75','/_blob/a37bcd751aa45bf584fe2988879c3478','/_blob/dbefa97b8c758a207bbd5da9f18e26dc','/_blob/89849858ffa3e124656cf357a0f7518d','/_blob/1de3130b9e1df488e652f8235136d672','/_blob/7302c1f3aea71ecbbb9944d75e630029','/_blob/442bf9b2b2775f8476f87162a7fc34c9','/_blob/196570f20bac8095611580a9e65fedba'][Math.floor(this.rnd(i * 3.7 + 11) * 14)], d: (((i % 10) + Math.floor(i / 10)) * 0.03).toFixed(3) }))),
       pctTxt: String(st.pct || 0).padStart(3, '0'),
       greet: (this._greet || ['oxe'])[st.lw || 0] + '!',
-      hdrCls: 'hdr ' + (menu ? 'dark' : ((st.hdr || 'hero') === 'hero' ? 'dark' : st.hdr + ' grad')),
+      hdrCls: 'hdr ' + ((st.hdr || 'hero') === 'hero' ? 'dark' : st.hdr + ' grad'),
       mbtnCls: 'mbtn' + (menu ? ' on' : ''),
       blobPts: this._blobPts,
       blobD: this._blobD,
