@@ -27,6 +27,12 @@ design/               fonte usada para gerar o index.html
 
 React 18.3.1 é carregado do cdnjs.
 
+## Favicon e compartilhamento
+
+`favicon.svg`, `favicon.ico`, `apple-touch-icon.png` e `icon-512.png` usam o monograma stq colorido. `og-image.png` (1200×630) é a imagem que aparece ao compartilhar o link.
+
+Quando o site tiver domínio, troque `og-image.png` nas tags `og:image` e `twitter:image` do `index.html` pela URL completa (ex.: `https://sotaqueagencia.com/og-image.png`), porque WhatsApp, LinkedIn e afins só leem endereços absolutos.
+
 ## O que ainda falta
 
 - Número do WhatsApp nos links `wa.me/55XXXXXXXXXXX`
