@@ -470,8 +470,8 @@ a{color:#212C29}a:hover{color:#305A9A}
 .rmeta{display:flex;flex-direction:column;gap:6px}
 .rsvc{font:800 15px/1.2 'Archivo',sans-serif;font-stretch:110%;text-transform:uppercase;letter-spacing:.03em}
 .rvoz{font:400 22px/1.1 'Gochi Hand',cursive;opacity:.85}
-.rby{align-self:flex-start;font:400 11px/1 'Anton',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:5px 8px 4px;border-radius:999px;background:var(--ink);color:var(--cream);margin-top:2px}
-.rph{align-self:flex-start;font:500 11px/1 ui-monospace,Menlo,monospace;padding:4px 7px;border-radius:5px;background:rgba(33,44,41,.1)}
+.rby{align-self:flex-start;font:400 13px/1 'Anton',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:7px 11px 6px;border-radius:999px;background:var(--ink);color:var(--yellow);margin-top:4px}
+.rph{align-self:flex-start;font:400 22px/1 'Gochi Hand',cursive;padding:4px 12px 6px;border-radius:999px;background:var(--yellow);transform:rotate(-3deg)}
 .rarr{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px currentColor;transition:transform .45s cubic-bezier(.2,1.6,.4,1),background .2s}
 .row:hover .rarr{transform:rotate(45deg);background:var(--ink);color:var(--cream);box-shadow:none}
 .rthumb{display:none}
@@ -533,6 +533,9 @@ a{color:#212C29}a:hover{color:#305A9A}
 .sGal .frame:nth-child(1){transform:rotate(1.2deg)}
 .sGal .frame:nth-child(2){transform:rotate(-2deg);margin-top:60px}
 .sGal .frame:only-child{grid-column:1 / -1}
+.phCover{aspect-ratio:16/7;background:var(--cc);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.phCover img{width:min(220px,30%);transform:rotate(-8deg)}
+.phCover .hand{font-size:clamp(28px,4vw,48px);transform:rotate(-3deg)}
 .sGal .phc{aspect-ratio:16/10;background:var(--cc);display:grid;place-items:center}
 .sGal .phc img{width:34%;transform:rotate(-8deg)}
 .sFoot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:36px 0 60px;border-top:2px solid var(--ink)}
@@ -661,7 +664,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 <span class="rthumb" aria-hidden="true"><sc-if value="{{c.ph}}" hint-placeholder-val="{{ false }}"><span class="phc"><img src="{{c.pet}}" alt=""></span></sc-if><sc-if value="{{c.real}}" hint-placeholder-val="{{ true }}"><img src="{{c.img}}" alt=""></sc-if></span>
 <span class="rnum">{{c.num}}</span>
 <span class="rname">{{c.n}}</span>
-<span class="rmeta"><span class="rsvc">{{c.svc}}</span><span class="rvoz">sotaque: {{c.voz}}</span><sc-if value="{{c.by}}" hint-placeholder-val="{{ false }}"><span class="rby">{{c.by}}</span></sc-if><sc-if value="{{c.ph}}" hint-placeholder-val="{{ false }}"><span class="rph">[placeholder, trocar pelo case real]</span></sc-if></span>
+<span class="rmeta"><span class="rsvc">{{c.svc}}</span><span class="rvoz">sotaque: {{c.voz}}</span><sc-if value="{{c.by}}" hint-placeholder-val="{{ false }}"><span class="rby">{{c.by}}</span></sc-if><sc-if value="{{c.ph}}" hint-placeholder-val="{{ false }}"><span class="rph">em breve</span></sc-if></span>
 <span class="rarr" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span>
 </a>
 </sc-for>
@@ -733,7 +736,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 <div class="stop">
 <button type="button" class="sClose" onClick="{{closeCase}}" aria-label="Fechar case" tabIndex="{{stabi}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 <div class="wrap">
-<div class="sKick"><span class="disp">case {{cur.num}} / {{totalTxt}}</span><sc-for list="{{cur.tagList}}" as="t" hint-placeholder-count="2"><span class="sTag">{{t}}</span></sc-for></div>
+<div class="sKick"><span class="disp">case {{cur.num}} / {{totalTxt}}</span><sc-for list="{{cur.tagList}}" as="t" hint-placeholder-count="2"><span class="sTag">{{t}}</span></sc-for><sc-if value="{{cur.by}}" hint-placeholder-val="{{ false }}"><span class="sTag" style="background: #E5CB5A; color: #212C29">{{cur.by}}</span></sc-if></div>
 <h2 class="sName">{{cur.n}}</h2>
 <p class="sVoz">o sotaque da marca: {{cur.voz}}</p>
 </div>
@@ -741,7 +744,7 @@ a{color:#212C29}a:hover{color:#305A9A}
 <div class="sCover">
 <div class="frame"><div class="bar"><i></i><i></i><i></i><b></b></div>
 <sc-if value="{{cur.real}}" hint-placeholder-val="{{ true }}"><img src="{{cur.img}}" alt="{{cur.alt}}"></sc-if>
-<sc-if value="{{cur.ph}}" hint-placeholder-val="{{ false }}"><div class="sGal"><div class="phc" style="grid-column: 1 / -1; aspect-ratio: 16/8"><img src="{{cur.pet}}" alt=""></div></div></sc-if>
+<sc-if value="{{cur.ph}}" hint-placeholder-val="{{ false }}"><div class="phCover"><img src="{{cur.pet}}" alt=""><span class="hand">em breve</span></div></sc-if>
 </div>
 </div>
 <div class="wrap">
@@ -782,18 +785,16 @@ class Component extends DCLogic {
         d1: fill('Contar o desafio: o que o Instituto precisava comunicar e pra quem (doadores, padrinhos, comunidade de Osasco)'), d2: fill('Contar a solução: estrutura do site, tom de voz, doação e apadrinhamento em destaque'), d3: fill('Resultado: doações, acessos, depoimentos do time do Instituto') },
       { id: 'casal-corretor', n: 'Casal Corretor', tags: ['social', 'site'], tagList: ['Social media', 'Site'], svc: 'Social media + site', voz: 'próximo e confiável', color: '#C9A46A', text: '#212C29', img: 'assets/casal1.webp', gal: ['assets/casal_bio.webp'], url: 'https://www.instagram.com/casalcorretoroficial/', urlTxt: '@casalcorretoroficial', status: 'Redes rodando · site em produção', alt: 'Grade do Instagram do Casal Corretor com fotos de imóveis',
         d1: fill('Contar o desafio: como se destacar na curadoria de imóveis em São Paulo'), d2: fill('Contar a solução: linha editorial, vídeos de tour, "vendido" como selo, site em desenvolvimento'), d3: fill('Resultado: números do Instagram (alcance, seguidores, contatos, imóveis vendidos)') },
-      { id: 'musa', n: 'Musa', tags: ['site'], tagList: ['Site', 'Grande marca'], svc: 'Site institucional', voz: 'sóbrio e técnico', color: '#F6C9A6', text: '#212C29', img: 'assets/musa1.webp', gal: ['assets/musa2.webp', 'assets/musa3.webp'], url: 'https://www.musa.co/', urlTxt: 'musa.co', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial do site da Musa, gestão de resíduos',
+      { id: 'musa', n: 'Musa', tags: ['site'], tagList: ['Site', 'Grande marca'], svc: 'Site institucional', voz: 'sóbrio e técnico', color: '#F6C9A6', text: '#212C29', img: 'assets/musa1.webp', gal: ['assets/musa2.webp', 'assets/musa3.webp'], url: 'https://www.musa.co/', urlTxt: 'musa.co', status: 'No ar', by: 'feito na SELVA AGENCY', alt: 'Página inicial do site da Musa, gestão de resíduos',
         d1: fill('Contar o desafio: apresentar uma solução de resíduos B2B para grandes empresas'), d2: fill('Contar a solução: desenvolvimento, animações, plataforma, integrações'), d3: fill('Resultado: performance, leads, prazo de entrega') },
-      { id: 'aika', n: 'Aiká Body & Soul', tags: ['ecommerce'], tagList: ['E-commerce'], svc: 'E-commerce', voz: 'calmo e sensorial', color: '#A9CF84', text: '#212C29', img: 'assets/aika1.webp', gal: ['assets/aika2.webp'], url: 'https://www.aikabodysoul.com/', urlTxt: 'aikabodysoul.com', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial da loja Aiká Body & Soul',
+      { id: 'aika', n: 'Aiká Body & Soul', tags: ['ecommerce'], tagList: ['E-commerce'], svc: 'E-commerce', voz: 'calmo e sensorial', color: '#A9CF84', text: '#212C29', img: 'assets/aika1.webp', gal: ['assets/aika2.webp'], url: 'https://www.aikabodysoul.com/', urlTxt: 'aikabodysoul.com', status: 'No ar', by: 'feito na SELVA AGENCY', alt: 'Página inicial da loja Aiká Body & Soul',
         d1: fill('Contar o desafio: vender produtos naturais com a mesma calma da marca'), d2: fill('Contar a solução: loja, catálogo por ritual, captura de e-mail, frete'), d3: fill('Resultado: conversão, ticket médio, vendas') },
-      { id: 'scaffold-play', n: 'Scaffold Play', tags: ['ecommerce', 'site'], tagList: ['E-commerce', 'Plataforma'], svc: 'Plataforma + e-commerce', voz: 'direto e pixelado', color: '#5FD068', text: '#212C29', img: 'assets/scaffold1.webp', gal: ['assets/scaffold2.webp'], url: 'https://scaffoldplay.com.br/', urlTxt: 'scaffoldplay.com.br', status: 'No ar', by: 'feito na SELVA', alt: 'Página inicial da Scaffold Play',
+      { id: 'scaffold-play', n: 'Scaffold Play', tags: ['ecommerce', 'site'], tagList: ['E-commerce', 'Plataforma'], svc: 'Plataforma + e-commerce', voz: 'direto e pixelado', color: '#5FD068', text: '#212C29', img: 'assets/scaffold1.webp', gal: ['assets/scaffold2.webp'], url: 'https://scaffoldplay.com.br/', urlTxt: 'scaffoldplay.com.br', status: 'No ar', by: 'feito na SELVA AGENCY', alt: 'Página inicial da Scaffold Play',
         d1: fill('Contar o desafio: vender trilhas de aprendizado pra líderes'), d2: fill('Contar a solução: trilhas, eventos, área do aluno, checkout'), d3: fill('Resultado: inscrições, eventos, alunos') },
-      { id: 'fernando-advogados', n: 'Fernando Advogados', tags: ['branding', 'site'], tagList: ['Branding', 'Site'], svc: 'Branding + site', voz: 'sério, mas gente boa', color: '#305A9A', text: '#F5ECDC', pet: P.siam, ph: true, gal: [], status: '[placeholder]',
-        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') },
-      { id: 'maria-cecilia-makeup', n: 'Maria Cecilia Makeup', tags: ['social'], tagList: ['Social media'], svc: 'Gestão de redes', voz: 'vaidoso e divertido', color: '#B1AED9', text: '#212C29', pet: P.cat, ph: true, gal: [], status: '[placeholder]',
-        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') },
-      { id: 'alt-marketing', n: 'Alt Marketing', tags: ['campanha', 'social'], tagList: ['Campanha'], svc: 'Campanha digital', voz: 'ousado e rápido', color: '#F84A48', text: '#212C29', pet: P.pug, ph: true, gal: [], status: '[placeholder]',
-        d1: fill('Placeholder: trocar por um case real'), d2: fill('Placeholder'), d3: fill('Placeholder') }
+      { id: 'alt-marketing', n: 'Alt Marketing', tags: ['campanha', 'social'], tagList: ['Em breve'], svc: 'Campanha digital', voz: 'ousado e rápido', color: '#F84A48', text: '#212C29', pet: P.pug, ph: true, gal: [], status: 'Em breve',
+        d1: 'Em breve a gente conta essa história.', d2: 'Tá no forno.', d3: 'Volta aqui daqui a pouco.' },
+      { id: 'mnbr-arquitetos', n: 'MNBR Arquitetos', tags: ['site'], tagList: ['Em breve'], svc: 'Site', voz: 'a gente ainda tá afinando', color: '#B1AED9', text: '#212C29', pet: P.siam, ph: true, gal: [], status: 'Em breve', by: 'feito na SELVA AGENCY',
+        d1: 'Em breve a gente conta essa história.', d2: 'Tá no forno.', d3: 'Volta aqui daqui a pouco.' }
     ];
   }
   componentDidMount() {
@@ -900,7 +901,7 @@ class Component extends DCLogic {
     this._pick = this._pick || {};
     this._open = this._open || {};
     this._enter = this._enter || {};
-    const chips = filters.map(([k, t]) => {
+    const chips = filters.filter(([k]) => k === 'all' || D.some((c) => c.tags.indexOf(k) >= 0)).map(([k, t]) => {
       if (!this._pick[k]) this._pick[k] = () => this.setState({ f: k, hov: null });
       return { t: t, n: String(k === 'all' ? D.length : D.filter((c) => c.tags.indexOf(k) >= 0).length).padStart(2, '0'), cls: 'fchip' + (flt === k ? ' on' : ''), on: flt === k ? 'true' : 'false', pick: this._pick[k] };
     });
@@ -917,11 +918,11 @@ class Component extends DCLogic {
       const i = D.indexOf(c);
       return { n: c.n, img: c.img, href: '#' + c.id, open: this._open[i], x: pp[k][0], y: pp[k][1], r: pp[k][2], z: pp[k][3], dl: (0.25 + k * 0.12).toFixed(2) };
     });
-    const cobIds = ['assets/cobogo-cobf0.webp', 'assets/cobogo-cobf1.webp', 'assets/cobogo-cobf2.webp', 'assets/cobogo-cobf3.webp', 'assets/cobogo-cobf4.webp', 'assets/cobogo-cobf5.webp', 'assets/cobogo-cobf6.webp', 'assets/cobogo-cobf7.webp', 'assets/cobogo-cobf8.webp', 'assets/cobogo-cobf9.webp', 'assets/cobogo-cobf10.webp', 'assets/cobogo-cobf11.webp'];
+    const cobIds = ['assets/cobogo-cobi0.webp', 'assets/cobogo-cobi1.webp', 'assets/cobogo-cobi2.webp', 'assets/cobogo-cobi3.webp', 'assets/cobogo-cobi4.webp', 'assets/cobogo-cobi5.webp', 'assets/cobogo-cobi6.webp', 'assets/cobogo-cobi7.webp', 'assets/cobogo-cobi8.webp', 'assets/cobogo-cobi9.webp', 'assets/cobogo-cobi10.webp', 'assets/cobogo-cobi11.webp'];
     const oi = st.open;
     const isOpen = oi != null;
     const cc = D[isOpen ? oi : 0];
-    const cur = Object.assign({}, cc, { num: String((isOpen ? oi : 0) + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
+    const cur = Object.assign({}, cc, { by: cc.by || '', num: String((isOpen ? oi : 0) + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
     const nxt = D[((isOpen ? oi : 0) + 1) % D.length];
     const live = D.filter((c) => !c.ph).length;
     return {
