@@ -431,7 +431,7 @@ class Component extends DCLogic {
   openCase(i, noHash) {
     this._lastFocus = document.activeElement;
     document.documentElement.style.overflow = 'hidden';
-    this.setState({ open: i, menu: false, hov: null });
+    this.setState({ open: i, last: i, menu: false, hov: null });
     if (!noHash && history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
     setTimeout(() => { if (this.sheet) { this.sheet.scrollTop = 0; const b = this.sheet.querySelector('.sClose'); if (b) b.focus({ preventScroll: true }); } }, 80);
   }
@@ -445,7 +445,7 @@ class Component extends DCLogic {
     const n = this.data().length;
     const st = this.state || {};
     const i = ((st.open || 0) + d + n) % n;
-    this.setState({ open: i });
+    this.setState({ open: i, last: i });
     if (history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
     if (this.sheet) this.sheet.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -516,9 +516,10 @@ class Component extends DCLogic {
     const cobIds = ['/_blob/534ee6290a928b37c02bf2c3e49a95f5', '/_blob/a980e23f3ecf0408b9c8f0bb0fab90e1', '/_blob/050975781194fdb24b25c855a1d0bb31', '/_blob/d9a53532dc999f49c967d9e7894c3c97', '/_blob/1eb89154bfc4a2d3e6ae00feb738c212', '/_blob/39d4b574e0ef16cf8b23c8ab83a55997', '/_blob/2c79a3d68e653c9bddd23e05b08d7f75', '/_blob/a37bcd751aa45bf584fe2988879c3478', '/_blob/dbefa97b8c758a207bbd5da9f18e26dc', '/_blob/89849858ffa3e124656cf357a0f7518d', '/_blob/1de3130b9e1df488e652f8235136d672', '/_blob/7302c1f3aea71ecbbb9944d75e630029'];
     const oi = st.open;
     const isOpen = oi != null;
-    const cc = D[isOpen ? oi : 0];
-    const cur = Object.assign({}, cc, { by: cc.by || '', num: String((isOpen ? oi : 0) + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
-    const nxt = D[((isOpen ? oi : 0) + 1) % D.length];
+    const ci = isOpen ? oi : (st.last || 0);
+    const cc = D[ci];
+    const cur = Object.assign({}, cc, { by: cc.by || '', num: String(ci + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
+    const nxt = D[(ci + 1) % D.length];
     const live = D.filter((c) => !c.ph).length;
     return {
       setRoot: this._setRoot, setPeek: this._setPeek, setSheet: this._setSheet,

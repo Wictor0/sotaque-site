@@ -870,7 +870,7 @@ class Component extends DCLogic {
   openCase(i, noHash) {
     this._lastFocus = document.activeElement;
     document.documentElement.style.overflow = 'hidden';
-    this.setState({ open: i, menu: false, hov: null });
+    this.setState({ open: i, last: i, menu: false, hov: null });
     if (!noHash && history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
     setTimeout(() => { if (this.sheet) { this.sheet.scrollTop = 0; const b = this.sheet.querySelector('.sClose'); if (b) b.focus({ preventScroll: true }); } }, 80);
   }
@@ -884,7 +884,7 @@ class Component extends DCLogic {
     const n = this.data().length;
     const st = this.state || {};
     const i = ((st.open || 0) + d + n) % n;
-    this.setState({ open: i });
+    this.setState({ open: i, last: i });
     if (history.replaceState) history.replaceState(null, '', '#' + this.data()[i].id);
     if (this.sheet) this.sheet.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -955,9 +955,10 @@ class Component extends DCLogic {
     const cobIds = ['assets/cobogo-cobi0.webp', 'assets/cobogo-cobi1.webp', 'assets/cobogo-cobi2.webp', 'assets/cobogo-cobi3.webp', 'assets/cobogo-cobi4.webp', 'assets/cobogo-cobi5.webp', 'assets/cobogo-cobi6.webp', 'assets/cobogo-cobi7.webp', 'assets/cobogo-cobi8.webp', 'assets/cobogo-cobi9.webp', 'assets/cobogo-cobi10.webp', 'assets/cobogo-cobi11.webp'];
     const oi = st.open;
     const isOpen = oi != null;
-    const cc = D[isOpen ? oi : 0];
-    const cur = Object.assign({}, cc, { by: cc.by || '', num: String((isOpen ? oi : 0) + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
-    const nxt = D[((isOpen ? oi : 0) + 1) % D.length];
+    const ci = isOpen ? oi : (st.last || 0);
+    const cc = D[ci];
+    const cur = Object.assign({}, cc, { by: cc.by || '', num: String(ci + 1).padStart(2, '0'), real: !cc.ph, ph: !!cc.ph, url: cc.url || '', noUrl: !cc.url, urlTxt: cc.urlTxt || '', alt: cc.alt || '', pet: cc.pet || '', gal: cc.gal || [] });
+    const nxt = D[(ci + 1) % D.length];
     const live = D.filter((c) => !c.ph).length;
     return {
       setRoot: this._setRoot, setPeek: this._setPeek, setSheet: this._setSheet,
