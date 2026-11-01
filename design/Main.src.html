@@ -811,7 +811,7 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame(loop);
     const greet = ['oxe', 'uai', 'bah', 'égua', 'eita', 'mermão', 'tchê', 'arretado', 'visse', 'sô', 'mano', 'painho'];
     this._greet = greet;
-    const skip = window.innerHeight > 1900 || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const skip = true; // o carregamento agora é o loader de cobogós do index.html
     if (skip) { this.setState({ loading: false, ready: true }); this.startTimer(); }
     else {
       const t0 = performance.now();

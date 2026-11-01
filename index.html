@@ -28,6 +28,41 @@
 <script src="vendor/dc-runtime.js"></script>
 </head>
 <body>
+<style>
+#boot{position:fixed;inset:0;z-index:2147483000;background:#212C29;display:grid;place-items:center;transition:opacity .45s ease,visibility 0s .45s}
+#boot.out{opacity:0;visibility:hidden}
+#boot .grid{position:relative;width:70px;height:70px;opacity:0;animation:bootIn .3s ease .15s forwards}
+#boot .cb{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:5px;background-size:cover;animation:bootMove 2.16s cubic-bezier(.65,0,.35,1) infinite}
+#boot .c2{animation-delay:-1.44s}
+#boot .c3{animation-delay:-.72s}
+@keyframes bootIn{to{opacity:1}}
+@keyframes bootMove{
+  0%{transform:translate(0,0)}
+  6.25%,25%{transform:translate(38px,0)}
+  31.25%,50%{transform:translate(38px,38px)}
+  56.25%,75%{transform:translate(0,38px)}
+  81.25%,100%{transform:translate(0,0)}
+}
+@media (prefers-reduced-motion:reduce){#boot .cb{animation-duration:6s}}
+</style>
+<div id="boot" aria-hidden="true"><div class="grid">
+<i class="cb c1" style="background-image:url(assets/cobogo-cobi2.webp)"></i>
+<i class="cb c2" style="background-image:url(assets/cobogo-cobi4.webp)"></i>
+<i class="cb c3" style="background-image:url(assets/cobogo-cobi10.webp)"></i>
+</div></div>
+<script>
+(function(){
+  var t0=Date.now(),done=false;
+  function hide(){if(done)return;done=true;var b=document.getElementById('boot');if(!b)return;b.classList.add('out');setTimeout(function(){b.remove()},600)}
+  function check(){
+    if(document.querySelector('.stq')){
+      var f=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();
+      Promise.race([f,new Promise(function(r){setTimeout(r,1500)})]).then(function(){setTimeout(hide,Math.max(0,350-(Date.now()-t0)))});
+    } else if(Date.now()-t0<8000){requestAnimationFrame(check)} else hide();
+  }
+  requestAnimationFrame(check);
+})();
+</script>
 
 <x-dc>
 <helmet>
@@ -834,7 +869,7 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame(loop);
     const greet = ['oxe', 'uai', 'bah', 'égua', 'eita', 'mermão', 'tchê', 'arretado', 'visse', 'sô', 'mano', 'painho'];
     this._greet = greet;
-    const skip = window.innerHeight > 1900 || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const skip = true; // o carregamento agora é o loader de cobogós do index.html
     if (skip) { this.setState({ loading: false, ready: true }); this.startTimer(); }
     else {
       const t0 = performance.now();
