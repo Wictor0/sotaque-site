@@ -45,7 +45,7 @@ todos os testes.
 | # | Bloco | Modelo | Status |
 | --- | --- | --- | --- |
 | S0 | Simplificar o projeto | Sonnet | feito (commit 105deac) |
-| S1 | Transições entre seções | Opus | a fazer |
+| S1 | Transições entre seções | Opus | feito (commit 595b5b1) |
 | S2 | Transição home para cases | Opus | a fazer |
 | S3 | Personagens e stickers vivos | Opus | a fazer |
 | S4 | Loader com peso | Fable 5.2 | a fazer |
